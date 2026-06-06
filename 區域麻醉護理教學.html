@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>區域麻醉護理教學</title>
+<style>
+:root {
+  --primary: #87a5d0;
+  --primary-light: #e4ecf5;
+  --primary-dark: #5a7faa;
+  --dark: #5c5953;
+  --text: #5c5953;
+  --text-light: #8a847f;
+  --bg: #f7f6f4;
+  --card: #ffffff;
+  --border: #ddd9d6;
+  --danger: #b86b78;
+  --danger-light: #f7eaec;
+  --warn: #a8854a;
+  --warn-light: #f6f0e6;
+  --shadow: 0 1px 6px rgba(92,89,83,0.10);
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; font-size: 15px; line-height: 1.75; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--card); border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(92,89,83,0.08);
+}
+.nav-inner {
+  max-width: 980px; margin: 0 auto; padding: 0 20px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.nav-logo { display: flex; align-items: center; margin-right: 12px; padding: 10px 0; }
+.nav-logo img { height: 32px; }
+.nav-btn {
+  background: none; border: none; cursor: pointer;
+  padding: 8px 13px; border-radius: 8px; color: var(--text-light);
+  font-size: 13px; transition: all .18s; white-space: nowrap;
+}
+.nav-btn:hover, .nav-btn.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 600; }
+
+main { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* HERO */
+.hero {
+  background: var(--primary-light);
+  border-radius: var(--radius); padding: 30px 28px; margin-bottom: 24px;
+  border: 1px solid #c8d9ed;
+}
+.hero h1 { font-size: 22px; color: var(--primary-dark); margin-bottom: 6px; letter-spacing: .02em; }
+.hero p { color: var(--text-light); font-size: 14px; }
+.hero-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.chip {
+  padding: 4px 13px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  background: var(--card); color: var(--primary-dark); border: 1px solid #c8d9ed;
+}
+.chip.dark { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* CARDS */
+.card {
+  background: var(--card); border-radius: var(--radius);
+  padding: 22px 24px; margin-bottom: 16px;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+}
+.card-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--dark); }
+
+/* GRID */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media(max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+/* ROLE CARDS */
+.role-card { border-radius: 10px; padding: 16px 18px; border: 1px solid var(--border); }
+.role-card.blue  { background: var(--primary-light); border-color: #c8d9ed; }
+.role-card.pink  { background: #f5eef5; border-color: #d8c8d8; }
+.role-card.sand  { background: #f5f0ea; border-color: #d8d0c4; }
+.role-card.rose  { background: var(--danger-light); border-color: #e8c4ca; }
+.role-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--primary-dark); }
+.role-card.rose h3 { color: var(--danger); }
+.role-card ul { list-style: none; }
+.role-card ul li { font-size: 13px; padding: 1px 0 1px 16px; position: relative; color: var(--text); }
+.role-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--primary); font-weight: 900; }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; }
+th { background: var(--primary); color: #fff; padding: 9px 14px; text-align: left; font-weight: 600; }
+td { padding: 9px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:hover td { background: var(--primary-light); }
+tr:last-child td { border-bottom: none; }
+
+/* ACCORDION */
+.accordion { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+.acc-header {
+  width: 100%; text-align: left; background: var(--card); padding: 14px 18px;
+  border: none; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--dark);
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background .18s;
+}
+.acc-header:hover { background: var(--primary-light); }
+.acc-header.open { background: var(--primary); color: #fff; }
+.acc-header .acc-arrow { font-size: 12px; transition: transform .2s; }
+.acc-header.open .acc-arrow { transform: rotate(180deg); }
+.acc-body { display: none; padding: 18px 20px; border-top: 1px solid var(--border); background: var(--card); }
+.acc-body.open { display: block; }
+
+/* ALERTS */
+.alert { border-radius: 10px; padding: 13px 16px; margin: 12px 0; font-size: 14px; line-height: 1.65; }
+.alert strong { display: block; margin-bottom: 4px; font-size: 14px; }
+.alert-info    { background: var(--primary-light); border-left: 4px solid var(--primary); color: #2e5070; }
+.alert-danger  { background: var(--danger-light);  border-left: 4px solid var(--danger);  color: #7a2e38; }
+.alert-warn    { background: var(--warn-light);    border-left: 4px solid var(--warn);    color: #6a4e20; }
+.alert-success { background: #eef4ee;              border-left: 4px solid #7aaa7a;        color: #2a5030; }
+
+/* FLOW STEPS */
+.flow-step { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+.step-num {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; margin-top: 1px;
+}
+.step-num.danger { background: var(--danger); }
+.step-content { flex: 1; min-width: 0; }
+.step-title { font-weight: 700; color: var(--primary-dark); font-size: 14px; }
+.step-title.danger { color: var(--danger); }
+.step-body { font-size: 13px; color: var(--text-light); margin-top: 3px; line-height: 1.65; }
+
+/* SCENARIO TABS */
+.scenario-tab { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.stab {
+  padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600;
+  border: 1px solid var(--border); background: var(--card); color: var(--text-light); transition: all .18s;
+}
+.stab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.stab:hover:not(.active) { border-color: var(--primary); color: var(--primary-dark); }
+.scenario-content { display: none; }
+.scenario-content.active { display: block; }
+
+/* ANATOMY */
+.anatomy-wrap { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+.anatomy-img-box { flex: 0 0 auto; text-align: center; }
+.anatomy-img-box img { max-width: 220px; border-radius: 8px; border: 1px solid var(--border); }
+.anatomy-img-placeholder {
+  width: 180px; height: 380px; border: 2px dashed var(--border); border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  color: var(--text-light); font-size: 12px; text-align: center; padding: 16px;
+}
+.anatomy-legend { flex: 1; min-width: 220px; }
+.legend-item {
+  display: flex; align-items: center; gap: 10px; padding: 7px 10px;
+  border-radius: 8px; cursor: pointer; transition: background .15s; margin-bottom: 4px;
+}
+.legend-item:hover { background: var(--primary-light); }
+.legend-dot { width: 13px; height: 13px; border-radius: 50%; flex-shrink: 0; }
+.legend-text { font-size: 13px; }
+
+/* INNER TABS */
+.inner-tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+.itab {
+  padding: 9px 18px; border: none; background: none; cursor: pointer;
+  font-size: 14px; color: var(--text-light); border-bottom: 2px solid transparent;
+  margin-bottom: -2px; transition: all .18s; white-space: nowrap;
+}
+.itab.active { color: var(--primary-dark); border-bottom-color: var(--primary); font-weight: 700; }
+.itab-content { display: none; }
+.itab-content.active { display: block; }
+
+/* BADGE */
+.badge { display: inline-block; padding: 3px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.badge-1 { background: var(--primary-light); color: var(--primary-dark); }
+.badge-2 { background: var(--warn-light);    color: var(--warn); }
+.badge-3 { background: var(--danger-light);  color: var(--danger); }
+
+/* CHECKLIST */
+.checklist label {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; font-size: 14px; line-height: 1.5;
+}
+.checklist label:last-child { border-bottom: none; }
+.checklist input[type=checkbox] { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; accent-color: var(--primary); cursor: pointer; }
+.checklist label.checked { text-decoration: line-through; color: var(--text-light); }
+
+/* SBAR */
+.sbar-grid { display: grid; grid-template-columns: 36px 1fr; gap: 6px 14px; align-items: start; }
+.sbar-letter { font-size: 22px; font-weight: 900; color: var(--primary); line-height: 1.2; padding-top: 2px; }
+.sbar-content { font-size: 14px; margin-bottom: 10px; }
+.sbar-content strong { display: block; margin-bottom: 5px; }
+.sbar-fill { background: var(--primary-light); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text-light); font-style: italic; line-height: 1.65; }
+
+/* QUIZ */
+.quiz-progress { background: var(--border); border-radius: 10px; height: 7px; margin-bottom: 18px; overflow: hidden; }
+.quiz-bar { background: var(--primary); height: 100%; border-radius: 10px; transition: width .4s; }
+.quiz-q p { font-weight: 600; margin-bottom: 12px; font-size: 15px; line-height: 1.6; }
+.quiz-options { display: flex; flex-direction: column; gap: 9px; }
+.qopt {
+  padding: 11px 16px; border-radius: 9px; border: 1.5px solid var(--border);
+  cursor: pointer; font-size: 14px; transition: all .18s; background: var(--card); line-height: 1.55;
+}
+.qopt:hover { border-color: var(--primary); background: var(--primary-light); }
+.qopt.correct { background: #eef4ee; border-color: #7aaa7a; color: #2a5030; }
+.qopt.wrong   { background: var(--danger-light); border-color: var(--danger); color: #7a2e38; }
+.quiz-explain { margin-top: 12px; }
+.quiz-score { font-size: 30px; font-weight: 800; color: var(--primary-dark); }
+.quiz-btn { padding: 10px 26px; background: var(--primary); color: #fff; border: none; border-radius: 9px; cursor: pointer; font-size: 14px; margin-top: 14px; }
+.quiz-btn:hover { background: var(--primary-dark); }
+
+/* LAST timeline */
+.last-timeline { display: flex; flex-direction: column; }
+.lt-row { display: flex; gap: 0; align-items: stretch; }
+.lt-spine { display: flex; flex-direction: column; align-items: center; width: 38px; flex-shrink: 0; }
+.lt-dot { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+.lt-line { flex: 1; width: 2px; background: var(--border); min-height: 16px; }
+.lt-body { flex: 1; padding: 0 0 18px 14px; min-width: 0; }
+.lt-tag { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; margin-bottom: 5px; }
+
+/* BULLETS */
+ul.blist { list-style: none; padding: 0; }
+ul.blist li { padding: 3px 0 3px 18px; position: relative; font-size: 14px; line-height: 1.65; }
+ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--primary); }
+
+/* DRUG ACCORDION category label */
+.drug-cat-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 10px;
+  background: var(--primary); color: #fff;
+}
+
+/* author bar */
+.author-bar {
+  background: var(--primary-light); border: 1px solid #c8d9ed;
+  border-radius: 10px; padding: 11px 16px; font-size: 13px; color: var(--primary-dark);
+  margin-bottom: 22px; line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="logo.png" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none; font-weight:700; color:var(--primary-dark); font-size:15px;">區域麻醉護理教學</span>
+    </div>
+    <button class="nav-btn active" onclick="showSection('home')">首頁</button>
+    <button class="nav-btn" onclick="showSection('basics')">基礎概念</button>
+    <button class="nav-btn" onclick="showSection('anatomy')">解剖圖解</button>
+    <button class="nav-btn" onclick="showSection('drugs')">藥物速查</button>
+    <button class="nav-btn" onclick="showSection('scenarios')">臨床情境</button>
+    <button class="nav-btn" onclick="showSection('last')">LAST急救</button>
+    <button class="nav-btn" onclick="showSection('checklist')">照護清單</button>
+    <button class="nav-btn" onclick="showSection('quiz')">知識測驗</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ===== HOME ===== -->
+<div class="section active" id="sec-home">
+  <div class="hero">
+    <h1>區域麻醉護理學員互動式學習平台</h1>
+    <p style="margin-top:4px;">麻醉護理學員課後參考資源</p>
+    <div class="hero-chips">
+      <span class="chip">脊髓麻醉</span>
+      <span class="chip">硬膜外麻醉</span>
+      <span class="chip">神經阻斷</span>
+      <span class="chip dark">LAST急救</span>
+      <span class="chip dark">臨床情境</span>
+      <span class="chip">照護清單</span>
+      <span class="chip">知識測驗</span>
+    </div>
+  </div>
+
+  <div class="author-bar">
+    本平台依照麻醉護理學員的執業角色設計，課程核心：<strong>安全監測 · 病人照護 · 團隊協作 · 及時通報</strong>，而非獨立執行穿刺技術。
+  </div>
+
+  <p style="font-weight:700; font-size:15px; margin-bottom:12px; color:var(--dark);">麻醉護理師在區域麻醉中的四大角色</p>
+  <div class="grid2">
+    <div class="role-card blue">
+      <h3>病人照護</h3>
+      <ul>
+        <li>術前評估與禁忌症確認</li>
+        <li>過敏史、凝血狀態確認</li>
+        <li>協助知情同意與衛教</li>
+        <li>術後疼痛評估與跌倒預防</li>
+      </ul>
+    </div>
+    <div class="role-card sand">
+      <h3>技術協助</h3>
+      <ul>
+        <li>協助病人擺位</li>
+        <li>準備無菌器械與藥物</li>
+        <li>超音波設備準備協助</li>
+        <li>維持無菌環境</li>
+      </ul>
+    </div>
+    <div class="role-card pink">
+      <h3>安全監測</h3>
+      <ul>
+        <li>生命徵象、意識狀態</li>
+        <li>鎮靜深度評估</li>
+        <li>阻斷效果與範圍</li>
+        <li>LAST早期徵象辨識</li>
+      </ul>
+    </div>
+    <div class="role-card rose">
+      <h3>團隊溝通</h3>
+      <ul>
+        <li>SBAR標準化交班</li>
+        <li>與手術室/恢復室接班</li>
+        <li>異常通報與記錄</li>
+        <li>導管狀態追蹤</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <p style="font-weight:700; font-size:15px; margin-bottom:12px; color:var(--dark);">依年資分級學習目標</p>
+    <div class="grid3">
+      <div class="card" style="border-top:3px solid var(--primary);">
+        <span class="badge badge-1" style="margin-bottom:9px; display:inline-block;">初階 第一年</span>
+        <p style="font-size:13px; color:var(--text-light);">建立安全概念與流程熟悉度。能看懂流程、知道風險、會通報，能協助基本照護。重點：LAST辨識、無菌技術、基本監測。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--warn);">
+        <span class="badge badge-2" style="margin-bottom:9px; display:inline-block;">中階 第二年</span>
+        <p style="font-size:13px; color:var(--text-light);">獨立完成護理評估與照護流程。加強超音波影像概念、導管照護與併發症早期辨識，能完整交班。</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--danger);">
+        <span class="badge badge-3" style="margin-bottom:9px; display:inline-block;">高階 第三年+</span>
+        <p style="font-size:13px; color:var(--text-light);">整合全流程，具備教學與品質改善能力。特殊族群照護（兒童、孕婦、抗凝血藥）、複雜案例主導。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BASICS ===== -->
+<div class="section" id="sec-basics">
+  <div class="inner-tabs">
+    <button class="itab active" onclick="showItab('basics','overview')">概論</button>
+    <button class="itab" onclick="showItab('basics','spinal')">脊髓麻醉</button>
+    <button class="itab" onclick="showItab('basics','epidural')">硬膜外麻醉</button>
+    <button class="itab" onclick="showItab('basics','nerve')">神經阻斷</button>
+  </div>
+
+  <!-- OVERVIEW with accordion comparison -->
+  <div class="itab-content active" id="basics-overview">
+    <div class="card">
+      <div class="card-title">區域麻醉三種類型（點選展開）</div>
+
+      <div class="accordion">
+        <button class="acc-header open" onclick="toggleAcc(this)">
+          脊髓麻醉（Spinal Anesthesia）<span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body open">
+          <div class="grid2">
+            <div>
+              <p style="font-size:13px; color:var(--text-light); margin-bottom:10px;">局部麻醉劑注入蜘蛛膜下腔（含腦脊髓液），達到快速可靠的下半身麻醉。</p>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">適用情況</p>
+              <ul class="blist">
+                <li>下腹、下肢、骨科、泌尿科手術</li>
+                <li>剖腹產</li>
+                <li>手術時間 2–3 小時以內</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">護理重點</p>
+              <ul class="blist">
+                <li>監測低血壓（最常見）</li>
+                <li>警惕高位脊麻（High Spinal）</li>
+                <li>PDPH（穿刺後頭痛）</li>
+                <li>尿滯留</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          硬膜外麻醉（Epidural）<span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <p style="font-size:13px; color:var(--text-light); margin-bottom:10px;">藥物進入硬膜外腔，作用較脊麻緩慢但可控制。通常以導管持續給藥，藥量約脊麻十倍。</p>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">適用情況</p>
+              <ul class="blist">
+                <li>剖腹產、減痛分娩</li>
+                <li>長時間手術</li>
+                <li>術後疼痛控制</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">護理重點</p>
+              <ul class="blist">
+                <li>導管照護與感染預防</li>
+                <li>PDPH 風險較低但仍需注意</li>
+                <li>嚴重併發症：全脊麻、LAST、硬膜外血腫</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <button class="acc-header" onclick="toggleAcc(this)">
+          周邊神經阻斷（Peripheral Nerve Block）<span class="acc-arrow">▼</span>
+        </button>
+        <div class="acc-body">
+          <div class="grid2">
+            <div>
+              <p style="font-size:13px; color:var(--text-light); margin-bottom:10px;">超音波或神經刺激器導引下，將局部麻醉藥精準注射在感覺神經周圍。常用於四肢手術。</p>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">適用情況</p>
+              <ul class="blist">
+                <li>四肢手術（精準單側肢體麻醉）</li>
+                <li>慢性肺病、嚴重心臟或腎功能不足患者</li>
+                <li>術後疼痛控制</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-weight:700; font-size:13px; margin-bottom:6px;">護理重點</p>
+              <ul class="blist">
+                <li>阻斷效果評估</li>
+                <li>LAST 警戒（藥量大時風險高）</li>
+                <li>術後導管照護（如有留置）</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">適應症 vs 禁忌症</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; color:var(--primary-dark); margin-bottom:8px; font-size:13px;">適應症</p>
+          <ul class="blist">
+            <li>腹部以下手術（下肢、骨科、泌尿）</li>
+            <li>產科剖腹產、減痛分娩</li>
+            <li>髖關節、膝關節手術</li>
+            <li>前列腺、膀胱鏡手術</li>
+            <li>腹股溝疝氣手術</li>
+            <li>術後疼痛控制</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; color:var(--danger); margin-bottom:8px; font-size:13px;">絕對禁忌症</p>
+          <ul class="blist" style="margin-bottom:12px;">
+            <li>病人拒絕接受</li>
+            <li>穿刺部位皮膚局部感染</li>
+            <li>明顯凝血功能異常</li>
+            <li>顱內壓升高</li>
+          </ul>
+          <p style="font-weight:700; color:var(--warn); margin-bottom:8px; font-size:13px;">相對禁忌症</p>
+          <ul class="blist">
+            <li>敗血症或菌血症</li>
+            <li>低血容量</li>
+            <li>中樞神經系統疾病</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">神經阻斷順序</div>
+      <div class="alert alert-info" style="margin-bottom:14px;">
+        <strong>局部麻醉藥不是一下子把神經關掉，是一層一層阻斷。</strong>
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">交感神經（C纖維）</div><div class="step-body">最先被阻斷 → 病人感覺「暖、不覺得冷」，皮膚潮紅</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">小感覺纖維（Aδ）</div><div class="step-body">疼痛與溫度覺消失</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">大感覺纖維（Aβ）</div><div class="step-body">本體感覺與觸覺消失</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">運動纖維（Aα）</div><div class="step-body">最後才被阻斷 → 腳才會麻或不能動</div></div></div>
+      <div class="alert alert-warn">焦慮的病人可能將本體感覺解釋成痛覺，給予安慰與保證非常重要。</div>
+    </div>
+  </div>
+
+  <!-- SPINAL TAB -->
+  <div class="itab-content" id="basics-spinal">
+    <div class="card">
+      <div class="card-title">脊髓麻醉</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">優點</p>
+          <ul class="blist"><li>操作時間短</li><li>起效快，麻醉效果可靠</li><li>手術中疼痛感少</li><li>減少全身麻醉風險</li></ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">護理注意</p>
+          <ul class="blist"><li>監測低血壓（最常見）</li><li>警惕高位脊麻</li><li>PDPH（穿刺後頭痛）</li><li>尿滯留</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">備物清單</div>
+      <div class="checklist">
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 消毒液 + 無菌棉籤</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 無菌手套（確認醫師尺寸）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 腰麻包</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 酒精棉片</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 局部麻醉劑（Marcaine Heavy / Plain）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> LA: 2% Xylocaine（皮膚局麻）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 3ml、5ml 空針</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> Spinal needle（25、26、27 號）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 急救設備確認（O₂、抽吸、急救車）</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">病人擺位技巧</div>
+      <div class="alert alert-info">
+        <strong>口訣：膝蓋找肚子，胸口找下巴，肩膀放輕鬆，像蝦子一樣彎</strong>
+        目的：擴大椎間空隙，便於穿刺。
+      </div>
+      <ul class="blist" style="margin-top:12px;">
+        <li>坐位或側臥位均可</li>
+        <li>確保病人舒適，預防焦慮性躁動</li>
+        <li>打針過程中提醒病人不要動</li>
+        <li>完成後緩慢協助病人改變體位</li>
+        <li>接受鎮靜者加強呼吸監測</li>
+      </ul>
+    </div>
+    <div class="alert alert-danger">
+      <strong>高位脊髓麻醉警示（High Spinal）</strong>
+      若麻醉後突然出現「雙手發麻、呼吸變淺、說話含糊」，務必高度懷疑 High Spinal！立即通知麻醉醫師，準備插管與急救。
+    </div>
+  </div>
+
+  <!-- EPIDURAL TAB -->
+  <div class="itab-content" id="basics-epidural">
+    <div class="card">
+      <div class="card-title">硬脊膜外麻醉</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">優點</p>
+          <ul class="blist"><li>PDPH 風險較低</li><li>可延長麻醉時間（導管）</li><li>可用於術後止痛</li><li>低血壓較少見</li></ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">嚴重併發症</p>
+          <ul class="blist"><li>藥物誤入蜘蛛膜下腔 → 全脊麻</li><li>藥物誤入血管 → LAST</li><li>硬膜外血腫（劇烈背痛+神經缺損）</li><li>PDPH（穿刺後頭痛）</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">備物清單</div>
+      <div class="checklist">
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 消毒液 + 無菌棉籤</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 無菌手套（確認醫師尺寸）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 腰麻包 + 無菌1×1小紗</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 酒精棉片</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 局部麻醉劑：2% Xylocaine</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 10ml 空針</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 26 或 30 號小針頭</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> Epidural set（黃軟、白硬、藍）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> OP SITE + 3M 敷料</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">PDPH（穿刺後頭痛）</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">典型症狀</p>
+          <ul class="blist"><li>通常麻醉後 3 天內發生</li><li>頭痛向額部及枕部放射</li><li><strong>直立時更嚴重，仰臥緩解</strong></li><li>視覺障礙、聽力減退</li></ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">危險因子</p>
+          <ul class="blist"><li>年輕女性</li><li>較粗的穿刺針</li><li>懷孕</li><li>多次硬膜穿刺</li></ul>
+        </div>
+      </div>
+      <div class="alert alert-info" style="margin-top:12px;">
+        <strong>治療：</strong>補充液體、保持仰臥、止痛藥。頭痛持續超過 24 小時可考慮硬膜外自體血液填充（Epidural Blood Patch），成功率 65–98%，常立即見效。
+      </div>
+    </div>
+  </div>
+
+  <!-- NERVE TAB -->
+  <div class="itab-content" id="basics-nerve">
+    <div class="card">
+      <div class="card-title">周邊神經阻斷</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">優點</p>
+          <ul class="blist"><li>維持意識清醒（保有氣道保護反射）</li><li>適合慢性肺病、嚴重心臟或腎功能不足患者</li><li>術後疼痛控制效果好</li><li>減少全身麻醉用藥</li></ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">缺點與注意</p>
+          <ul class="blist"><li>難以完全預測阻斷效果</li><li>取決於醫師經驗</li><li>需要病患配合</li><li>LAST 風險（藥量大時）</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">備物清單</div>
+      <div class="checklist">
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 超音波機器 + Jelly</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 消毒液 + 無菌棉籤</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 局部麻醉劑（依醫師習慣配製）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 10ml、20ml 空針</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> T-cont（延長管）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> Nerve block 用針頭</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 20% Lipid Emulsion 就位確認</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 急救設備確認</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">超音波設備協助重點</div>
+      <ul class="blist">
+        <li>開機確認探頭選擇（線陣探頭用於淺層，凸陣探頭用於深層）</li>
+        <li>調整深度（Depth）、增益（Gain）、焦點（Focus）</li>
+        <li>準備無菌探頭保護套，避免污染術野</li>
+        <li>協助準備超音波凝膠</li>
+        <li>操作結束後確認探頭清潔消毒</li>
+        <li>協助影像儲存（如院內規定需紀錄）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANATOMY ===== -->
+<div class="section" id="sec-anatomy">
+  <div class="inner-tabs">
+    <button class="itab active" onclick="showItab('anat','map')">前面皮節圖</button>
+    <button class="itab" onclick="showItab('anat','assess')">感覺評估方法</button>
+    <button class="itab" onclick="showItab('anat','surgery')">手術高度對照</button>
+    <button class="itab" onclick="showItab('anat','tips')">教學重點</button>
+    <button class="itab" onclick="showItab('anat','landmarks')">體表標記</button>
+  </div>
+
+  <!-- TAB 1: DERMATOME MAP -->
+  <div class="itab-content active" id="anat-map">
+    <div class="card">
+      <div class="card-title">正面皮節分布圖（Anterior Dermatome Map）</div>
+      <p style="font-size:13px; color:var(--text-light); margin-bottom:16px;">
+        以下為示意圖，顯示脊髓麻醉感覺平面評估常用的正面皮節分布。各色帶代表對應脊髓節段。
+      </p>
+      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+
+        <!-- REAL DERMATOME IMAGE (place dermatome.png in same folder) -->
+        <div style="flex:0 0 auto; max-width:420px;">
+          <img src="dermatome.png" alt="Anterior and Posterior Dermatome Landmarks"
+            style="width:100%; border-radius:8px; border:1px solid var(--border); display:block;"
+            onerror="this.style.display='none'; document.getElementById('svg-fallback').style.display='block'">
+          <p style="font-size:11px; color:var(--text-light); margin-top:8px; line-height:1.6;">
+            Kim A, Sendlewski G, Zador E, et al. Placing a Lumbar Epidural Catheter.
+            <em>N Engl J Med.</em> 2018;378(8):e11.
+            doi:10.1056/NEJMvcm1500438<br>
+            Used under license from The New England Journal of Medicine.
+          </p>
+        </div>
+
+        <!-- SVG FALLBACK (shows if dermatome.png not found) -->
+        <div id="svg-fallback" style="flex:0 0 auto; display:none;">
+          <svg width="330" height="560" viewBox="0 0 330 560" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+            <defs>
+              <clipPath id="bc">
+                <!-- Head -->
+                <ellipse cx="105" cy="40" rx="28" ry="33"/>
+                <!-- Neck -->
+                <polygon points="94,71 116,71 119,90 91,90"/>
+                <!-- Torso -->
+                <polygon points="55,90 155,90 152,285 58,285"/>
+                <!-- Left arm -->
+                <polygon points="28,104 55,104 54,340 28,338"/>
+                <rect x="24" y="336" width="33" height="18" rx="9"/>
+                <!-- Right arm -->
+                <polygon points="155,104 182,104 182,338 156,340"/>
+                <rect x="153" y="336" width="33" height="18" rx="9"/>
+                <!-- Pelvis -->
+                <polygon points="58,285 152,285 160,318 50,318"/>
+                <!-- Left leg -->
+                <rect x="55" y="316" width="47" height="228" rx="12"/>
+                <!-- Right leg -->
+                <rect x="108" y="316" width="47" height="228" rx="12"/>
+              </clipPath>
+            </defs>
+
+            <!-- COLORED BANDS (clipped to body) -->
+            <!-- C2-C3: head -->
+            <ellipse cx="105" cy="40" rx="28" ry="33" fill="#c8d8f0" clip-path="url(#bc)"/>
+            <!-- C4-T2: neck/upper chest -->
+            <rect x="0" y="68" width="260" height="45" fill="#b8cce8" clip-path="url(#bc)"/>
+            <!-- T3-T4: nipple -->
+            <rect x="0" y="113" width="260" height="35" fill="#a5bcde" clip-path="url(#bc)"/>
+            <!-- T5-T6: xiphoid -->
+            <rect x="0" y="148" width="260" height="32" fill="#90abcf" clip-path="url(#bc)"/>
+            <!-- T7-T8 -->
+            <rect x="0" y="180" width="260" height="32" fill="#87a5d0" clip-path="url(#bc)"/>
+            <!-- T9-T10: umbilicus -->
+            <rect x="0" y="212" width="260" height="35" fill="#7090ba" clip-path="url(#bc)"/>
+            <!-- T11-T12: groin -->
+            <rect x="0" y="247" width="260" height="75" fill="#5a7aa4" clip-path="url(#bc)"/>
+            <!-- L1: hip -->
+            <rect x="0" y="316" width="260" height="42" fill="#a89060" clip-path="url(#bc)"/>
+            <!-- L2-L3: thigh -->
+            <rect x="0" y="358" width="260" height="60" fill="#988050" clip-path="url(#bc)"/>
+            <!-- L4: lower leg -->
+            <rect x="0" y="418" width="260" height="55" fill="#887040" clip-path="url(#bc)"/>
+            <!-- L5-S1: foot -->
+            <rect x="0" y="473" width="260" height="75" fill="#78583a" clip-path="url(#bc)"/>
+
+            <!-- BODY OUTLINE on top -->
+            <ellipse cx="105" cy="40" rx="28" ry="33" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <polygon points="94,71 116,71 119,90 91,90" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <polygon points="55,90 155,90 152,285 58,285" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <polygon points="28,104 55,104 54,340 28,338" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <rect x="24" y="336" width="33" height="18" rx="9" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <polygon points="155,104 182,104 182,338 156,340" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <rect x="153" y="336" width="33" height="18" rx="9" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <polygon points="58,285 152,285 160,318 50,318" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <rect x="55" y="316" width="47" height="228" rx="12" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+            <rect x="108" y="316" width="47" height="228" rx="12" fill="none" stroke="#5c5953" stroke-width="1.5"/>
+
+            <!-- HORIZONTAL DIVIDERS -->
+            <line x1="55" y1="130" x2="155" y2="130" stroke="white" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+            <line x1="55" y1="162" x2="155" y2="162" stroke="white" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+            <line x1="55" y1="196" x2="155" y2="196" stroke="white" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+            <line x1="55" y1="229" x2="155" y2="229" stroke="white" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+            <line x1="55" y1="265" x2="155" y2="265" stroke="white" stroke-width="0.8" stroke-dasharray="3,2" opacity="0.7"/>
+
+            <!-- NIPPLE MARKERS (T4) -->
+            <circle cx="88" cy="130" r="3" fill="white" opacity="0.8"/>
+            <circle cx="122" cy="130" r="3" fill="white" opacity="0.8"/>
+            <!-- XIPHOID MARKER (T6) -->
+            <circle cx="105" cy="162" r="3" fill="white" opacity="0.8"/>
+            <!-- UMBILICUS (T10) -->
+            <circle cx="105" cy="229" r="4" fill="white" opacity="0.9" stroke="white" stroke-width="1"/>
+
+            <!-- LABELS (right side — outside body) -->
+            <line x1="184" y1="40"  x2="208" y2="40"  stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="44"  font-size="11" fill="#5c5953" font-weight="700">C2</text>
+            <text x="224" y="44"  font-size="10" fill="#8a847f"> 頭</text>
+
+            <line x1="184" y1="104" x2="208" y2="104" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="108" font-size="11" fill="#5c5953" font-weight="700">T1</text>
+            <text x="224" y="108" font-size="10" fill="#8a847f"> 上胸</text>
+
+            <line x1="184" y1="130" x2="208" y2="130" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="134" font-size="11" fill="#5c5953" font-weight="700">T4</text>
+            <text x="224" y="134" font-size="10" fill="#8a847f"> 乳頭</text>
+
+            <line x1="184" y1="162" x2="208" y2="162" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="166" font-size="11" fill="#5c5953" font-weight="700">T6</text>
+            <text x="224" y="166" font-size="10" fill="#8a847f"> 劍突</text>
+
+            <line x1="184" y1="196" x2="208" y2="196" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="200" font-size="11" fill="#5c5953" font-weight="700">T8</text>
+
+            <line x1="184" y1="229" x2="208" y2="229" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="233" font-size="11" fill="#5c5953" font-weight="700">T10</text>
+            <text x="228" y="233" font-size="10" fill="#8a847f"> 肚臍</text>
+
+            <line x1="184" y1="265" x2="208" y2="265" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="269" font-size="11" fill="#5c5953" font-weight="700">T12</text>
+            <text x="228" y="269" font-size="10" fill="#8a847f"> 腹股溝</text>
+
+            <line x1="157" y1="338" x2="208" y2="338" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="342" font-size="11" fill="#5c5953" font-weight="700">L1</text>
+            <text x="224" y="342" font-size="10" fill="#8a847f"> 腹股溝下</text>
+
+            <line x1="157" y1="390" x2="208" y2="390" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="394" font-size="11" fill="#5c5953" font-weight="700">L3</text>
+            <text x="224" y="394" font-size="10" fill="#8a847f"> 膝</text>
+
+            <line x1="157" y1="445" x2="208" y2="445" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="449" font-size="11" fill="#5c5953" font-weight="700">L4</text>
+            <text x="224" y="449" font-size="10" fill="#8a847f"> 內踝</text>
+
+            <line x1="157" y1="500" x2="208" y2="500" stroke="#8a847f" stroke-width="0.8"/>
+            <text x="211" y="504" font-size="11" fill="#5c5953" font-weight="700">S1</text>
+            <text x="224" y="504" font-size="10" fill="#8a847f"> 足跟</text>
+          </svg>
+          <p style="font-size:11px; color:var(--text-light); text-align:center; margin-top:4px; max-width:200px;">正面皮節示意圖（教學用備用）</p>
+        </div>
+
+        <!-- LANDMARK TABLE -->
+        <div style="flex:1; min-width:220px;">
+
+          <p style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--primary-dark);">關鍵記憶標記</p>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--primary-light); border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#a5bcde; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>T4</strong> = 乳頭線</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--primary-light); border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#90abcf; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>T6</strong> = 劍突水平</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--primary-light); border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#7090ba; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>T10</strong> = 肚臍水平</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:var(--primary-light); border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#5a7aa4; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>T12</strong> = 腹股溝韌帶中點</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#f2ede6; border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#a89060; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>L3</strong> = 膝關節股骨內側髁</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#f2ede6; border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#887040; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>L4</strong> = 內踝</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; padding:8px 12px; background:#f2ede6; border-radius:8px;">
+              <div style="width:14px; height:14px; border-radius:50%; background:#78583a; flex-shrink:0;"></div>
+              <span style="font-size:13px;"><strong>S1</strong> = 足跟外側</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">完整皮節正面標記表</div>
+      <p style="font-size:13px; color:var(--text-light); margin-bottom:14px;">
+        資料來源：Kim et al. NEJM 2018；Daniels et al. NEJM 2023, 2026
+      </p>
+      <div class="inner-tabs" style="border-bottom:1px solid var(--border);">
+        <button class="itab active" style="font-size:12px; padding:6px 12px;" onclick="showDermTab('trunk')">軀幹（T）</button>
+        <button class="itab" style="font-size:12px; padding:6px 12px;" onclick="showDermTab('lower')">下肢（L/S）</button>
+        <button class="itab" style="font-size:12px; padding:6px 12px;" onclick="showDermTab('upper')">頭頸上肢（C/T）</button>
+      </div>
+      <div id="derm-trunk">
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <tr><th>皮節</th><th>正面解剖標記</th><th>臨床意義</th></tr>
+            <tr><td><strong>T4</strong></td><td>乳頭線（第四肋間隙）</td><td>上腹部手術最低要求高度</td></tr>
+            <tr><td><strong>T6</strong></td><td>劍突水平（第六肋間隙）</td><td>上腹部手術常見高度</td></tr>
+            <tr><td><strong>T10</strong></td><td>肚臍水平（第十肋間隙）</td><td>下腹部手術（如剖腹產）最低要求</td></tr>
+            <tr><td><strong>T12</strong></td><td>腹股溝韌帶中點</td><td>下腹部和骨盆手術</td></tr>
+            <tr><td><strong>L1</strong></td><td>腹股溝區域（T12和L2之間中點）</td><td>下肢手術</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="derm-lower" style="display:none;">
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <tr><th>皮節</th><th>正面解剖標記</th><th>臨床意義</th></tr>
+            <tr><td><strong>L2</strong></td><td>大腿前內側中點（腹股溝韌帶中點到股骨內側髁連線中點）</td><td>大腿手術</td></tr>
+            <tr><td><strong>L3</strong></td><td>膝蓋上方股骨內側髁</td><td>膝關節手術</td></tr>
+            <tr><td><strong>L4</strong></td><td>內踝</td><td>小腿和足部手術</td></tr>
+            <tr><td><strong>L5</strong></td><td>足背第三蹠趾關節</td><td>足部手術</td></tr>
+            <tr><td><strong>S1</strong></td><td>足跟外側</td><td>足部手術</td></tr>
+          </table>
+        </div>
+      </div>
+      <div id="derm-upper" style="display:none;">
+        <div class="table-wrap" style="margin-top:12px;">
+          <table>
+            <tr><th>皮節</th><th>正面解剖標記</th><th>備註</th></tr>
+            <tr><td><strong>C2</strong></td><td>枕骨隆突外側至少1公分</td><td rowspan="3" style="color:var(--text-light); font-size:12px;">較少用於脊髓麻醉評估，但需了解</td></tr>
+            <tr><td><strong>C3</strong></td><td>鎖骨上窩（鎖骨後方，鎖骨中線）</td></tr>
+            <tr><td><strong>C4</strong></td><td>肩鎖關節上方</td></tr>
+            <tr><td><strong>C5</strong></td><td>肘窩外側（橈側）</td><td></td></tr>
+            <tr><td><strong>C6</strong></td><td>拇指背側近端指骨</td><td></td></tr>
+            <tr><td><strong>C7</strong></td><td>中指背側近端指骨</td><td></td></tr>
+            <tr><td><strong>C8</strong></td><td>小指背側近端指骨</td><td></td></tr>
+            <tr><td><strong>T1</strong></td><td>肘窩內側（尺側）</td><td></td></tr>
+            <tr><td><strong>T2</strong></td><td>腋窩頂點</td><td></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: ASSESSMENT METHODS -->
+  <div class="itab-content" id="anat-assess">
+    <div class="card">
+      <div class="card-title">感覺平面評估方法</div>
+      <div class="alert alert-info" style="margin-bottom:18px;">
+        <strong>重要：不同感覺測試的阻斷平面不同！</strong>
+        交感神經阻斷平面最高，冷覺/針刺次之，觸覺最低但最能預測實際手術麻醉範圍。
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="background:var(--primary-light); border-radius:10px; padding:16px 18px; margin-bottom:12px;">
+            <p style="font-weight:700; font-size:14px; color:var(--primary-dark); margin-bottom:8px;">冷覺測試（最常用）</p>
+            <ul class="blist">
+              <li>使用酒精棉片或冰塊</li>
+              <li><strong>從下往上測試</strong>（已麻醉 → 未麻醉）</li>
+              <li>詢問：「這裡感覺冷嗎？」</li>
+              <li>記錄感覺冷的最高皮節</li>
+              <li>阻斷平面較高，向頭側延伸較遠</li>
+            </ul>
+          </div>
+          <div style="background:var(--primary-light); border-radius:10px; padding:16px 18px;">
+            <p style="font-weight:700; font-size:14px; color:var(--primary-dark); margin-bottom:8px;">針刺測試</p>
+            <ul class="blist">
+              <li>使用鈍針或牙籤</li>
+              <li>測試尖銳感覺</li>
+              <li>詢問：「這裡感覺尖銳嗎？」</li>
+              <li>阻斷平面通常比冷覺低 2–6 個皮節</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div style="background:#f2ede6; border-radius:10px; padding:16px 18px; margin-bottom:12px;">
+            <p style="font-weight:700; font-size:14px; color:var(--warn); margin-bottom:8px;">觸覺測試</p>
+            <ul class="blist">
+              <li>使用手指或棉花輕觸</li>
+              <li>觸覺阻斷平面最低</li>
+              <li>最接近手術麻醉的實際範圍</li>
+              <li>最能預測止血帶疼痛的發生</li>
+            </ul>
+          </div>
+          <div class="alert alert-warn">
+            <strong>三種測試平面比較（高 → 低）：</strong>
+            交感神經阻斷（最高，可高出感覺阻斷 6–7 節）<br>
+            冷覺 ≈ 針刺 &gt; 觸覺（最低，最接近實際手術麻醉）<br>
+            此差異在麻醉消退期最明顯。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">評估操作注意事項</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--danger);">常見錯誤</p>
+          <ul class="blist">
+            <li>從上往下測試（病人可能因預期給出錯誤答案）</li>
+            <li>只測試一側（應雙側評估）</li>
+            <li>測試點太少（應每個皮節都測試）</li>
+            <li>只用一種測試方法（建議至少冷覺＋觸覺）</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">溝通技巧</p>
+          <ul class="blist">
+            <li>向病人解釋：「我要測試麻醉的高度，請告訴我您的感覺。」</li>
+            <li>使用簡單問題：「這裡冷嗎？」「這裡有感覺嗎？」</li>
+            <li>記錄並報告：「感覺平面在 T6（劍突水平）。」</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">評估時機</div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">5–10 分鐘</div><div class="step-body">脊髓麻醉後開始評估感覺平面。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">15–20 分鐘</div><div class="step-body">達到最高平面（使用高比重局麻藥時）。</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">手術前</div><div class="step-body">確認麻醉高度足夠再開始手術。</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">手術中</div><div class="step-body">如病人不適，重新評估感覺平面。</div></div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-content"><div class="step-title">恢復室</div><div class="step-body">監測麻醉消退情況，確認阻斷逐漸消退，記錄運動功能恢復時間。</div></div></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: SURGERY LEVELS -->
+  <div class="itab-content" id="anat-surgery">
+    <div class="card">
+      <div class="card-title">手術類型與所需麻醉高度對照表</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>手術類型</th><th>建議最低感覺平面</th><th>正面標記</th></tr>
+          <tr><td>剖腹產</td><td style="color:var(--primary-dark); font-weight:700;">T4–T6</td><td>乳頭線 → 劍突</td></tr>
+          <tr><td>腹部內臟手術</td><td style="font-weight:700;">T4</td><td>乳頭線</td></tr>
+          <tr><td>下腹部手術</td><td style="font-weight:700;">T6–T8</td><td>劍突 → 肋緣下</td></tr>
+          <tr><td>膀胱/前列腺/子宮</td><td style="font-weight:700;">T10</td><td>肚臍水平</td></tr>
+          <tr><td>髖部手術</td><td style="font-weight:700;">T10</td><td>肚臍水平</td></tr>
+          <tr><td>下肢手術（使用止血帶）</td><td style="font-weight:700;">T8</td><td>肋緣下</td></tr>
+          <tr><td>膝關節手術</td><td style="font-weight:700;">T12–L1</td><td>腹股溝</td></tr>
+          <tr><td>足部/踝部手術</td><td style="font-weight:700;">L1–L3</td><td>腹股溝至大腿</td></tr>
+          <tr><td>經尿道手術</td><td style="font-weight:700;">T10</td><td>肚臍水平</td></tr>
+          <tr><td>會陰部手術</td><td style="font-weight:700;">S2–S5</td><td>薦骨區域</td></tr>
+        </table>
+      </div>
+      <div class="alert alert-warn" style="margin-top:14px;">
+        <strong>止血帶疼痛特別注意：</strong>使用止血帶的手術需要阻斷到 T8，即使手術部位只在膝蓋以下。止血帶壓迫感由 T8 支配，高度不足會造成止血帶疼痛。
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">脊椎表面標記（體表定位）</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">穿刺定位標記</p>
+          <ul class="blist">
+            <li><strong>L4</strong>：兩側髂骨棘（iliac crest）連線 → 腰麻最重要定位點</li>
+            <li><strong>C7</strong>：頸部最突出點 → 評估脊椎段數</li>
+            <li><strong>T7</strong>：肩胛骨下緣連線 → Epidural 注射參考</li>
+            <li><strong>L1</strong>：T12 肋骨邊緣往中心 10cm</li>
+            <li><strong>S2</strong>：後上腸骨脊</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">脊髓末端位置</p>
+          <ul class="blist">
+            <li><strong>成人</strong>：L1</li>
+            <li><strong>新生兒</strong>：L3</li>
+            <li>L2 以下穿刺不容易損傷脊髓（馬尾神經有活動度）</li>
+            <li>腰椎穿刺常在 L2–L3 或 L3–L4 間隙進行</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: TEACHING TIPS -->
+  <div class="itab-content" id="anat-tips">
+    <div class="card">
+      <div class="card-title">前彎姿勢皮節記憶法（Keegan-Garrett 概念）</div>
+      <p style="font-size:13px; color:var(--text-light); margin-bottom:14px;">
+        將身體想像成前彎的姿勢：軀幹的皮節如同蛋糕層層堆疊，四肢的皮節則沿胚胎發育方向向遠端延伸。這是理解皮節分布最直觀的方式。
+      </p>
+      <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+        <div style="flex:0 0 auto;">
+          <img src="dermatome-bent.png" alt="前彎姿勢皮節圖"
+            style="max-width:280px; border-radius:8px; border:1px solid var(--border);"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div style="display:none;"></div>
+        </div>
+        <div style="flex:1; min-width:200px;">
+          <p style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--primary-dark);">這張圖說明了什麼？</p>
+          <ul class="blist" style="margin-bottom:14px;">
+            <li><strong>軀幹（T2–T12）</strong>：前彎後像「蛋糕層」排列，直觀呈現胸椎節段由上往下的順序</li>
+            <li><strong>四肢（C5–T1、L1–S2）</strong>：胚胎期肢芽由軀幹向遠端生長，皮節沿此方向延伸——上肢從肩膀延伸到手指，下肢從鼠蹊延伸到腳</li>
+            <li><strong>C1 無皮節</strong>：C1 幾乎只有運動神經，無對應感覺分布</li>
+            <li><strong>臉部感覺</strong>：由第五對腦神經（三叉神經，CN V）控制，非脊髓節段</li>
+            <li><strong>重疊性</strong>：各皮節之間存在重疊，臨床判斷需靈活運用</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">給新手麻醉護理學員的記憶技巧</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--primary-dark);">口訣記憶法</p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="background:var(--primary-light); border-radius:8px; padding:10px 14px; font-size:13px;"><strong>T4</strong> = 乳頭（Tit = T-<strong>4</strong>）</div>
+            <div style="background:var(--primary-light); border-radius:8px; padding:10px 14px; font-size:13px;"><strong>T6</strong> = 劍突（Xiphoid = si<strong>X</strong> = 6）</div>
+            <div style="background:var(--primary-light); border-radius:8px; padding:10px 14px; font-size:13px;"><strong>T10</strong> = 肚臍（<strong>Ten</strong> = Tummy button）</div>
+            <div style="background:var(--primary-light); border-radius:8px; padding:10px 14px; font-size:13px;"><strong>T12</strong> = 腹股溝（<strong>Twelve</strong> = groin Twelve）</div>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--primary-dark);">實作練習建議</p>
+          <ul class="blist">
+            <li>在同儕身上練習觸摸和標記這些標記</li>
+            <li>使用可洗掉的筆標記皮節位置</li>
+            <li>練習從下往上評估感覺平面</li>
+            <li>雙側都要測試，不能只測一側</li>
+            <li>在督導下反覆練習，直到熟練</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">皮節圖的版本差異</div>
+      <p style="font-size:13px; color:var(--text-light); margin-bottom:12px;">不同教科書使用的皮節圖可能有差異，但關鍵臨床標記（T4=乳頭、T10=肚臍）在各版本中基本一致。</p>
+      <div class="grid2">
+        <div style="background:var(--primary-light); border-radius:10px; padding:14px 16px;">
+          <p style="font-weight:700; font-size:13px; margin-bottom:6px;">Foerster 圖（早期版本）</p>
+          <p style="font-size:13px; color:var(--text-light);">基於神經根切斷研究，顯示較多重疊區域。</p>
+        </div>
+        <div style="background:#f2ede6; border-radius:10px; padding:14px 16px;">
+          <p style="font-weight:700; font-size:13px; margin-bottom:6px;">Keegan and Garrett 圖（1948）</p>
+          <p style="font-size:13px; color:var(--text-light);">基於椎間盤突出壓迫神經根研究，顯示長條狀旋轉分布，許多現代教科書使用此版本。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">參考文獻</div>
+      <ol style="font-size:12px; color:var(--text-light); line-height:1.8; padding-left:20px;">
+        <li>Kim A, et al. Placing a Lumbar Epidural Catheter. <em>NEJM</em>. 2018;378(8):e11. doi:10.1056/NEJMvcm1500438</li>
+        <li>Greenberg SA. The History of Dermatome Mapping. <em>Arch Neurol</em>. 2003;60(1):126-31.</li>
+        <li>Daniels AH, et al. Clinical Examination of the Cervical Spine. <em>NEJM</em>. 2023;389(17):e34.</li>
+        <li>Daniels AH, et al. Clinical Examination of the Lumbar Spine. <em>NEJM</em>. 2026;394(13):e23.</li>
+        <li>Rocco AG, et al. Differential Spread of Blockade of Touch, Cold, and Pinprick During Spinal Anesthesia. <em>Anesth Analg</em>. 1985;64(9):917-23.</li>
+        <li>Chamberlain DP, Chamberlain BD. Changes in the Skin Temperature of the Trunk. <em>Anesthesiology</em>. 1986;65(2):139-43.</li>
+        <li>Downs MB, Laporte C. Conflicting Dermatome Maps. <em>J Orthop Sports Phys Ther</em>. 2011;41(6):427-34.</li>
+        <li>Lee MW, et al. An Evidence-Based Approach to Human Dermatomes. <em>Clin Anat</em>. 2008;21(5):363-73.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- TAB 5: LANDMARKS -->
+  <div class="itab-content" id="anat-landmarks">
+    <div class="card">
+      <div class="card-title">脊椎表面標記（體表定位）</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">穿刺定位標記</p>
+          <ul class="blist">
+            <li><strong>L4</strong>：兩側髂骨棘（iliac crest）連線 → 腰麻最重要定位點</li>
+            <li><strong>C7</strong>：頸部最突出點 → 評估脊椎段數</li>
+            <li><strong>T7</strong>：肩胛骨下緣連線 → Epidural 注射參考</li>
+            <li><strong>L1</strong>：T12 肋骨邊緣往中心 10cm</li>
+            <li><strong>S2</strong>：後上腸骨脊</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">脊髓末端位置</p>
+          <ul class="blist">
+            <li><strong>成人</strong>：L1</li>
+            <li><strong>新生兒</strong>：L3</li>
+            <li>L2 以下穿刺不容易損傷脊髓</li>
+            <li>腰椎穿刺常在 L2–L3 或 L3–L4 間隙進行</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DRUGS ===== -->
+<div class="section" id="sec-drugs">
+  <div class="card">
+    <div class="card-title">局部麻醉藥速查（點選分類展開）</div>
+
+    <div class="accordion">
+      <button class="acc-header open" onclick="toggleAcc(this)">
+        脊髓麻醉用藥<span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body open">
+        <div class="table-wrap">
+          <table>
+            <tr><th>藥物</th><th>濃度</th><th>作用時間</th><th>+Epi</th><th>備註</th></tr>
+            <tr><td><strong>Bupivacaine (Marcaine)</strong></td><td>0.5–0.75%</td><td>90–120 分</td><td>140+ 分</td><td>脊麻首選</td></tr>
+            <tr><td>Lidocaine</td><td>1–2.5%</td><td>45–60 分</td><td>75–90 分</td><td>短時手術</td></tr>
+            <tr><td>Ropivacaine</td><td>0.5–0.75%</td><td>60–90 分</td><td>80–120 分</td><td>替代方案</td></tr>
+            <tr><td>Tetracaine</td><td>0.5%</td><td>90–150 分</td><td>180–300 分</td><td>長時間手術</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        硬膜外麻醉用藥<span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="table-wrap">
+          <table>
+            <tr><th>藥物</th><th>濃度</th><th>起效</th><th>作用時間</th><th>+Epi</th></tr>
+            <tr><td><strong>Bupivacaine</strong></td><td>0.25–0.5%</td><td>10–20 分</td><td>120–240 分</td><td>150–240 分</td></tr>
+            <tr><td>Ropivacaine</td><td>0.2–0.5%</td><td>10–20 分</td><td>120–240 分</td><td>150–200 分</td></tr>
+            <tr><td>Lidocaine</td><td>1–2%</td><td>5–15 分</td><td>60–120 分</td><td>90–180 分</td></tr>
+            <tr><td>Chloroprocaine</td><td>2–3%</td><td>3–10 分</td><td>30–90 分</td><td>60–90 分</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="acc-header" onclick="toggleAcc(this)">
+        神經阻斷用藥<span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="table-wrap">
+          <table>
+            <tr><th>藥物</th><th>濃度</th><th>起效</th><th>作用時間</th><th>備註</th></tr>
+            <tr><td><strong>Ropivacaine</strong></td><td>0.25–0.75%</td><td>10–20 分</td><td>240–360 分</td><td>首選，低心臟毒性</td></tr>
+            <tr><td>Bupivacaine</td><td>0.25–0.5%</td><td>15–20 分</td><td>240–480 分</td><td>長效</td></tr>
+            <tr><td>Lidocaine</td><td>1–2%</td><td>5–10 分</td><td>60–120 分</td><td>短效</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">LAST 毒性排序與輔助藥</div>
+    <div class="alert alert-danger">
+      <strong>毒性大小：Bupivacaine &gt; Lidocaine &gt; Chloroprocaine &gt; Ropivacaine</strong>
+      Ropivacaine 是目前神經阻斷首選，心臟毒性最低。
+    </div>
+    <div class="grid2" style="margin-top:14px;">
+      <div>
+        <p style="font-weight:700; font-size:13px; margin-bottom:7px;">Epinephrine 輔助</p>
+        <ul class="blist">
+          <li>延長麻醉持續時間</li>
+          <li>減慢藥物吸收，降低血中濃度峰值</li>
+          <li>配方：20ml LA + 0.1ml 1:1000 Epi = 1:200,000</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:700; font-size:13px; margin-bottom:7px;">Sodium Bicarbonate 輔助</p>
+        <ul class="blist">
+          <li>提高 pH 值，增加非離子化型態</li>
+          <li>加速藥物擴散，起效更快</li>
+          <li>配方：10ml Lidocaine + 1ml 8.4% NaHCO₃</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:14px;">
+      <strong>高風險族群注意：</strong>兒童、老人、低體重、孕婦、肝功能異常、心臟疾病、多部位阻斷 → 劑量安全確認，主動提醒醫師。
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCENARIOS ===== -->
+<div class="section" id="sec-scenarios">
+  <p style="margin-bottom:16px; color:var(--text-light); font-size:14px;">以下五種情境取自臨床實務，點選後依照流程步驟思考應對方式。</p>
+  <div class="scenario-tab">
+    <button class="stab active" onclick="showScenario('s1')">術中突然痛</button>
+    <button class="stab" onclick="showScenario('s2')">突然低血壓</button>
+    <button class="stab" onclick="showScenario('s3')">腰麻打不到</button>
+    <button class="stab" onclick="showScenario('s4')">腳還會動</button>
+    <button class="stab" onclick="showScenario('s5')">神經阻斷不成功</button>
+  </div>
+
+  <div class="scenario-content active" id="sc-s1">
+    <div class="card">
+      <div class="card-title">情境一：術中病人說「痛！」</div>
+      <div class="alert alert-info" style="margin-bottom:16px;">
+        <strong>先思考：這是真的痛，還是焦慮性錯覺痛？</strong>
+        在半身麻醉狀態下，病人可能仍有被壓的、被拉扯的感覺，但不是疼痛。焦慮的病人會將本體感覺解釋成痛。
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">評估與傾聽</div><div class="step-body">立即回應病人，評估生命徵象。確認阻斷範圍（冷熱試驗、針刺測試）是否到位。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">與病人溝通（焦慮性錯覺痛）</div><div class="step-body">讓病人覺得被理解，而不是被否定。</div></div></div>
+      <div class="alert alert-success" style="margin:0 0 12px 42px;">
+        <strong>建議說法：</strong>
+        「我們已經幫您確認過麻醉區域，目前的麻醉應該是有作用的。在半身麻醉的狀態下，您有可能還是會有被壓的、被拉扯的感覺，但不是痛的感覺，我們再觀察一下，如果還是不舒服一定要跟我說。」
+      </div>
+      <div class="alert alert-danger" style="margin:0 0 12px 42px;">
+        <strong>避免說：</strong>「你其實沒有痛！」（否定病人感受，增加焦慮與不信任）
+      </div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">加入生理解釋</div><div class="step-body">簡單解釋神經阻斷的感覺，讓病人理解這是正常現象，強調「會持續幫您監測與處理」。</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">通報麻醉醫師</div><div class="step-body">若確認突破性疼痛，立即通報。考慮追加鎮靜、鎮痛或改全身麻醉。</div></div></div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-s2">
+    <div class="card">
+      <div class="card-title">情境二：突然低血壓、冒冷汗</div>
+      <div class="alert alert-danger" style="margin-bottom:16px;">
+        <strong>最常見原因：交感神經阻斷 → 血管擴張 → 回心血量下降</strong>
+        需排除：出血、高位脊麻、過敏反應、LAST
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">立即評估</div><div class="step-body">量血壓、心率、SpO₂、意識狀態。確認是否伴隨頭暈、胸悶、噁心、冒汗。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">考慮體位調整</div><div class="step-body">仰臥位 + 抬高下肢（Trendelenburg position），增加回心血量。</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">給予 IV fluid bolus</div><div class="step-body">250–500ml NS 或 LR，快速補充血容量。</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">若 BP 仍未回升</div><div class="step-body">給予 Ephedrine 5–10mg IV（首選升壓劑，同時有 α、β 作用）。</div></div></div>
+      <div class="flow-step"><div class="step-num">5</div><div class="step-content"><div class="step-title">持續監測與判斷</div><div class="step-body">評估是否需排除內出血。考慮是否需 A-line 監測或呼叫麻醉主治醫師現場評估。</div></div></div>
+      <div class="card" style="background:var(--primary-light); border-color:#c8d9ed; margin-top:16px;">
+        <p style="font-weight:700; margin-bottom:10px; font-size:14px; color:var(--primary-dark);">記錄重點</p>
+        <div class="grid2">
+          <div style="font-size:13px;"><strong>時間與事件：</strong>低血壓發生時間、手術進展階段、是否伴隨主訴<br><br><strong>Block 範圍：</strong>麻到 T10？T4？藥物種類與劑量</div>
+          <div style="font-size:13px;"><strong>處置記錄：</strong>補液種類與量、Ephedrine 劑量與時間（例：Ephedrine 10mg IV @09:35）<br><br><strong>後續監測：</strong>BP 是否回升、症狀緩解情形</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-s3">
+    <div class="card">
+      <div class="card-title">情境三：腰麻打不到怎麼辦？</div>
+      <div class="alert alert-warn" style="margin-bottom:16px;">
+        <strong>常見原因：</strong>脊椎側彎、肥胖、骨刺、體位不佳、技術困難、解剖異常
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">協助體位再調整</div><div class="step-body">確認病人姿勢是否維持「蝦子彎」，協助最佳脊椎彎曲，重新評估體表標記。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">心理支持</div><div class="step-body">保持病人冷靜，避免因緊張而肌肉收縮、身體移動，增加穿刺困難。</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">與病人誠實溝通</div><div class="step-body">由醫師說明備案選項，護理師協助安撫情緒。溝通四大原則：誠實與尊重、具體說明選項、告知風險變化、重建安心感。</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">備案準備</div><div class="step-body">若確認改硬膜外或全身麻醉，立即準備相應備物，不浪費時間。</div></div></div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-s4">
+    <div class="card">
+      <div class="card-title">情境四：打完腰麻，病人腳還會動？</div>
+      <div class="alert alert-info" style="margin-bottom:16px;">
+        <strong>記得神經阻斷順序！</strong>運動神經（Aα）最後才被阻斷，等 15–20 分鐘是正常的。
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">等待觀察</div><div class="step-body">先確認感覺阻斷是否已出現（冷熱試驗），等候 15–20 分鐘觀察運動阻斷效果。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">評估可能原因</div><div class="step-body">通知醫師評估：針頭是否打偏、藥量/濃度是否正確、病人體位是否影響藥效分布（Baricity 效應）。</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">若仍不全</div><div class="step-body">由醫師評估：考慮補打 / 追加硬膜外 / 轉換麻醉方式。</div></div></div>
+      <div class="alert alert-warn">護理師不可獨自決定麻醉是否成功，需通報醫師確認。護理師需準確描述阻斷狀況（範圍、程度、時間）。</div>
+    </div>
+  </div>
+
+  <div class="scenario-content" id="sc-s5">
+    <div class="card">
+      <div class="card-title">情境五：神經阻斷不成功</div>
+      <div class="alert alert-warn" style="margin-bottom:16px;">
+        <strong>提醒：</strong>「通常神經阻斷前置作業不難，但需要注意的是：你的病人通常病況不是很好！把所有事都想一遍，不要留任何空間給意外。」
+      </div>
+      <div class="flow-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">評估 Block 品質</div><div class="step-body">確認超音波影像是否清楚呈現藥液擴散，Block 後是否出現預期的感覺麻木或運動阻斷。</div></div></div>
+      <div class="flow-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">給足夠時間</div><div class="step-body">確認藥量與等待時間是否足夠（各神經阻斷起效時間不同，有些需要 20–30 分鐘）。</div></div></div>
+      <div class="flow-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">準備術中備案</div><div class="step-body">提早與醫師討論：追加靜脈鎮痛（opioid、ketamine）、加深鎮靜、轉換全身麻醉。</div></div></div>
+      <div class="flow-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">高病況病人特別注意</div><div class="step-body">心肺功能差者轉全麻風險更高，需提早準備急救設備與藥物。</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LAST ===== -->
+<div class="section" id="sec-last">
+  <div class="alert alert-danger" style="font-size:15px; margin-bottom:20px;">
+    <strong>LAST = Local Anesthetic Systemic Toxicity（局部麻醉藥全身毒性反應）</strong>
+    對麻醉護理學員最高優先級的安全主題。主因：藥物誤注入血管或用藥過量。
+  </div>
+
+  <div class="card">
+    <div class="card-title">早期辨識：LAST 的症狀</div>
+    <div class="grid2">
+      <div>
+        <p style="font-weight:700; color:var(--warn); margin-bottom:10px; font-size:13px;">神經系統表現（先出現）</p>
+        <div class="last-timeline">
+          <div class="lt-row">
+            <div class="lt-spine"><div class="lt-dot" style="background:var(--warn);"></div><div class="lt-line"></div></div>
+            <div class="lt-body"><span class="lt-tag" style="background:var(--warn-light); color:var(--warn);">早期</span><p style="font-size:13px;">耳鳴、金屬味、口周麻木、頭暈、視力模糊</p></div>
+          </div>
+          <div class="lt-row">
+            <div class="lt-spine"><div class="lt-dot" style="background:var(--danger);"></div><div class="lt-line"></div></div>
+            <div class="lt-body"><span class="lt-tag" style="background:var(--danger-light); color:var(--danger);">中期</span><p style="font-size:13px;">躁動、意識改變、抽搐、震顫</p></div>
+          </div>
+          <div class="lt-row">
+            <div class="lt-spine"><div class="lt-dot" style="background:#7a2030;"></div><div class="lt-line" style="background:none;"></div></div>
+            <div class="lt-body"><span class="lt-tag" style="background:#7a2030; color:#fff;">晚期</span><p style="font-size:13px;">昏迷、呼吸停止</p></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-weight:700; color:var(--danger); margin-bottom:10px; font-size:13px;">心血管毒性（嚴重）</p>
+        <ul class="blist" style="margin-bottom:12px;">
+          <li>低血壓、心律不整</li>
+          <li>PR 間期延長</li>
+          <li>QRS 波持續時間增加</li>
+          <li>竇性心搏過緩</li>
+          <li>心搏停止</li>
+        </ul>
+        <div class="alert alert-danger">
+          酸中毒及缺氧會加重心臟毒性！<br><strong>優先處理氣道！</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">LAST 緊急處理流程</div>
+    <div class="flow-step"><div class="step-num danger">1</div><div class="step-content"><div class="step-title danger">立即停止注射局部麻醉藥</div><div class="step-body">如正在注射中，立即停止。</div></div></div>
+    <div class="flow-step"><div class="step-num danger">2</div><div class="step-content"><div class="step-title danger">呼叫與通報</div><div class="step-body">立即通知麻醉醫師、啟動急救支援（呼叫急救小組）。記錄症狀開始時間。</div></div></div>
+    <div class="flow-step"><div class="step-num danger">3</div><div class="step-content"><div class="step-title danger">氣道管理（最優先）</div><div class="step-body">給予 100% O₂、準備插管設備。如有呼吸停止或癲癇，協助氣道處理。</div></div></div>
+    <div class="flow-step"><div class="step-num danger">4</div><div class="step-content"><div class="step-title danger">準備 20% Lipid Emulsion（解毒劑）</div><div class="step-body"><strong>負荷劑量：</strong>1.5 ml/kg IV bolus（70kg 成人 ≈ 100ml），90–120 秒內注射完<br><strong>維持劑量：</strong>0.25 ml/kg/min，持續至症狀改善<br><em>確認院內脂肪乳劑存放位置！</em></div></div></div>
+    <div class="flow-step"><div class="step-num danger">5</div><div class="step-content"><div class="step-title danger">心跳停止：CPR + ACLS</div><div class="step-body">立即開始 CPR，同時給予 Lipid Emulsion。避免 Epinephrine 大劑量（&gt;1 mcg/kg）、Propofol、Calcium channel blockers。</div></div></div>
+    <div class="flow-step"><div class="step-num danger">6</div><div class="step-content"><div class="step-title danger">完整記錄</div><div class="step-body">症狀開始時間、藥物劑量、急救處置、生命徵象變化、所有給藥時間點。</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">護理師 LAST 能力目標</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>能力項目</th><th>學員應達成內容</th></tr>
+        <tr><td><strong>早期辨識</strong></td><td>能說出 LAST 的早期神經（耳鳴、金屬味、口周麻木）與心血管（低血壓、心律不整）徵象</td></tr>
+        <tr><td><strong>通報與啟動</strong></td><td>能立即通知麻醉醫師並啟動急救支援，記錄症狀開始時間</td></tr>
+        <tr><td><strong>急救準備</strong></td><td>知道 20% Lipid Emulsion 存放位置，能準備急救設備</td></tr>
+        <tr><td><strong>團隊協作</strong></td><td>能在模擬情境中清楚分工，回報時間點與給藥資訊</td></tr>
+        <tr><td><strong>紀錄能力</strong></td><td>能記錄症狀開始時間、藥物劑量、急救處置與生命徵象變化</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-warn" style="margin-top:14px;">
+      <strong>預防方法：</strong>注射藥物前反抽確認 · 使用含 Epi 試驗劑量 · 以低劑量分次注射完成阻斷 · 採用正確方式進行局部靜脈麻醉
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKLIST ===== -->
+<div class="section" id="sec-checklist">
+  <div class="inner-tabs">
+    <button class="itab active" onclick="showItab('checklist','preop')">術前準備</button>
+    <button class="itab" onclick="showItab('checklist','intraop')">術中監測</button>
+    <button class="itab" onclick="showItab('checklist','postop')">術後照護</button>
+    <button class="itab" onclick="showItab('checklist','sbar')">SBAR交班</button>
+  </div>
+
+  <div class="itab-content active" id="checklist-preop">
+    <div class="card">
+      <div class="card-title">術前評估核查清單</div>
+      <div class="checklist">
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認病人身份（姓名、病歷號、手術部位）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認手術同意書與麻醉同意書已完成</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 詢問過敏史（藥物、局麻藥）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認抗凝血藥物使用史（Warfarin、NOAC、Aspirin 等）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認凝血功能（PT/APTT、PLT）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 評估感染徵象（穿刺部位無紅腫、膿、皮膚感染）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 詢問既往神經學症狀（麻木、無力）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認脊椎病史（側彎、骨刺、手術史）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 建立 IV 管路，確認暢通</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 連接監測（BP、HR、SpO₂、ECG）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認急救設備可用（O₂、抽吸、急救車、Lipid Emulsion 位置）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 協助病人衛教（擺位配合、術中感覺說明）</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="itab-content" id="checklist-intraop">
+    <div class="card">
+      <div class="card-title">術中監測重點</div>
+      <div class="grid2">
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">常規監測</p>
+          <div class="checklist">
+            <label><input type="checkbox" onchange="toggleCheck(this)"> BP：每 3–5 分鐘監測（尤其前 20 分鐘）</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> HR：持續監測</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> SpO₂：持續監測</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> 呼吸型態：頻率、深度</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> 意識狀態與病人主訴</label>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:8px; color:var(--primary-dark);">阻斷評估</p>
+          <div class="checklist">
+            <label><input type="checkbox" onchange="toggleCheck(this)"> 感覺阻斷範圍（冷熱試驗）</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> 運動阻斷程度</label>
+            <label><input type="checkbox" onchange="toggleCheck(this)"> 鎮靜深度評估（Ramsay Scale）</label>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-danger" style="margin-top:14px;">
+        <strong>立即通報的警示徵象：</strong>
+        收縮壓 &lt;90 mmHg、心率 &lt;50/min、SpO₂ &lt;94%、意識改變、耳鳴/金屬味/口周麻木（LAST 早期）、雙手發麻+呼吸變淺（High Spinal）
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">鎮靜深度評估（Ramsay Sedation Scale）</div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>分級</th><th>狀態</th><th>臨床說明</th></tr>
+          <tr><td><strong>1</strong></td><td>清醒、焦慮躁動</td><td>無鎮靜</td></tr>
+          <tr><td><strong>2</strong></td><td>清醒、合作平靜</td><td>輕度鎮靜（目標）</td></tr>
+          <tr><td><strong>3</strong></td><td>嗜睡但對指令有反應</td><td>中度鎮靜（目標）</td></tr>
+          <tr><td><strong>4</strong></td><td>深睡，可被叫醒</td><td>偏深，注意呼吸</td></tr>
+          <tr><td><strong>5</strong></td><td>對刺激反應遲鈍</td><td>過深，需干預</td></tr>
+          <tr><td><strong>6</strong></td><td>對刺激無反應</td><td>過度鎮靜，緊急處理</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="itab-content" id="checklist-postop">
+    <div class="card">
+      <div class="card-title">術後照護核查清單</div>
+      <div class="checklist">
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 評估疼痛（NRS 0–10 分）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 評估感覺阻斷恢復程度（溫度覺/觸覺）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 評估運動阻斷恢復程度（活動下肢）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 確認病人能承受重量再允許下床（跌倒預防）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 頭痛評估（是否有 PDPH？直立加重？）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 排尿評估（尿滯留高風險）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 若有導管：敷料完整、固定確認、輸注幫浦確認</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 病人與家屬衛教（肢體保護、禁止熱敷麻木區）</label>
+        <label><input type="checkbox" onchange="toggleCheck(this)"> 完成 SBAR 交班至恢復室/病房護理師</label>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">需立即通報的術後警示</div>
+      <ul class="blist">
+        <li>持續麻木或無力（超過預期恢復時間）</li>
+        <li>劇烈背痛伴隨神經症狀（排除硬膜外血腫）</li>
+        <li>呼吸困難、胸悶、意識改變</li>
+        <li>導管敷料滲濕、導管滑脫</li>
+        <li>阻斷範圍異常擴大</li>
+        <li>穿刺部位紅、腫、熱、痛、膿</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="itab-content" id="checklist-sbar">
+    <div class="card">
+      <div class="card-title">SBAR 標準化交班範本</div>
+      <p style="font-size:13px; color:var(--text-light); margin-bottom:18px;">可依實際情況調整。</p>
+      <div class="sbar-grid">
+        <div class="sbar-letter">S</div>
+        <div class="sbar-content">
+          <strong>Situation（現況）</strong>
+          <div class="sbar-fill">「這是 XX 床，XX 先生/小姐，今天接受 XXX 手術，使用 XXX 區域麻醉（脊麻/硬膜外/神經阻斷）。」</div>
+        </div>
+        <div class="sbar-letter">B</div>
+        <div class="sbar-content">
+          <strong>Background（背景）</strong>
+          <div class="sbar-fill">「使用藥物：XXX，總劑量：XXmg。執行時間：XX:XX，感覺阻斷至 T__，運動阻斷評分 __。術中 BP 最低/最高，使用 Ephedrine XXmg。」</div>
+        </div>
+        <div class="sbar-letter">A</div>
+        <div class="sbar-content">
+          <strong>Assessment（評估）</strong>
+          <div class="sbar-fill">「目前阻斷還在，預計 XXX 分鐘後恢復。未見 LAST/High Spinal 跡象。疼痛 NRS：X 分。導管狀態良好/已固定。」</div>
+        </div>
+        <div class="sbar-letter">R</div>
+        <div class="sbar-content">
+          <strong>Recommendation（建議）</strong>
+          <div class="sbar-fill">「請持續監測 BP、SpO₂，阻斷完全消退前預防跌倒。若出現持續麻木/劇烈背痛/呼吸困難，立即通報麻醉醫師。疼痛控制依醫囑。」</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">護理紀錄四大原則</div>
+      <div class="grid2">
+        <div>
+          <ul class="blist">
+            <li><strong>即時</strong>：事件發生後盡快記錄</li>
+            <li><strong>客觀</strong>：記錄觀察到的事實，非推測</li>
+            <li><strong>完整</strong>：不遺漏重要項目</li>
+            <li><strong>可追溯</strong>：清楚時間軸</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-weight:700; font-size:13px; margin-bottom:7px;">必要記錄內容</p>
+          <ul class="blist">
+            <li>執行時間、阻斷部位</li>
+            <li>使用藥物與總劑量</li>
+            <li>生命徵象與變化趨勢</li>
+            <li>病人主訴、鎮靜程度</li>
+            <li>併發症、醫師通知時間與處置</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="section" id="sec-quiz">
+  <div class="card">
+    <div class="card-title">區域麻醉知識測驗</div>
+    <p style="font-size:14px; color:var(--text-light); margin-bottom:14px;">共 10 題，完成後顯示成績與解說。</p>
+    <div class="quiz-progress"><div class="quiz-bar" id="quiz-bar" style="width:0%"></div></div>
+    <div id="q-display"></div>
+    <div id="quiz-result" style="display:none; text-align:center; padding:28px 0;">
+      <div class="quiz-score" id="final-score"></div>
+      <p id="final-msg" style="margin-top:10px; color:var(--text-light); font-size:15px;"></p>
+      <button class="quiz-btn" onclick="resetQuiz()">重新測驗</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// NAV
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// INNER TABS
+function showItab(group, id) {
+  const parent = event.target.closest('.section');
+  parent.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
+  parent.querySelectorAll('.itab-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(group + '-' + id).classList.add('active');
+}
+
+// ACCORDION
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+// SCENARIOS
+function showScenario(id) {
+  document.querySelectorAll('.scenario-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+  document.getElementById('sc-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ANATOMY
+function showAnatInfo(level) {}
+
+// DERMATOME SUB-TABS
+function showDermTab(id) {
+  ['trunk','lower','upper'].forEach(t => {
+    const el = document.getElementById('derm-' + t);
+    if (el) el.style.display = (t === id) ? 'block' : 'none';
+  });
+  // update tab buttons
+  if (event && event.target) {
+    const parent = event.target.closest('.card');
+    if (parent) {
+      parent.querySelectorAll('.itab').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  }
+}
+
+// CHECKLIST
+function toggleCheck(input) {
+  input.closest('label').classList.toggle('checked', input.checked);
+}
+
+// QUIZ
+const questions = [
+  { q:'腰麻後，神經阻斷的正確順序是什麼？', opts:['運動 → 感覺 → 交感','交感 → 感覺 → 運動','感覺 → 交感 → 運動','運動 → 交感 → 感覺'], ans:1, explain:'交感神經（C纖維）最先被阻斷 → 小感覺纖維（Aδ，痛/溫覺）→ 大感覺纖維（Aβ）→ 運動纖維（Aα）最後。腳會動不代表腰麻失敗！' },
+  { q:'LAST 最早出現的典型神經系統症狀是哪些？', opts:['抽搐、昏迷','耳鳴、金屬味、口周麻木','低血壓、心跳停止','QRS波加寬、心律不整'], ans:1, explain:'LAST 早期先出現耳鳴、金屬味、口周麻木、頭暈 → 之後出現躁動、抽搐 → 最嚴重是昏迷。心血管毒性通常在 CNS 症狀之後出現。' },
+  { q:'脊髓麻醉後病人說「雙手發麻，覺得呼吸變淺」，最應懷疑什麼？', opts:['焦慮性錯覺痛','High Spinal（高位脊髓麻醉）','正常的腰麻效果','硬膜穿刺後頭痛'], ans:1, explain:'雙手發麻+呼吸變淺是 High Spinal 的典型警示徵象，藥物擴散過高影響胸/頸段神經，嚴重時會導致呼吸停止。立即通報麻醉醫師，準備氣道處理。' },
+  { q:'腰麻打完，病人腳還會動，護理師應如何處理？', opts:['立即告知醫師準備重打','解釋神經阻斷先影響感覺，等 15–20 分鐘再評估運動阻斷','告訴病人腰麻失敗了','不用理會'], ans:1, explain:'運動纖維（Aα）是最後被阻斷的。先確認感覺阻斷範圍，等 15–20 分鐘再評估運動阻斷。這是正常過程，非失敗。' },
+  { q:'PDPH 最典型的特徵是？', opts:['仰臥時頭痛更嚴重','直立時頭痛更嚴重，仰臥緩解','頭痛與體位無關','頭痛合併高燒與頸部僵硬'], ans:1, explain:'PDPH 是「體位性頭痛」：直立時頭痛加重，仰臥緩解。腦脊髓液從硬膜破洞漏出，直立時顱內壓降低。頭痛持續 >24 小時可考慮 Epidural Blood Patch，成功率 65–98%。' },
+  { q:'LAST 的解毒劑是什麼？', opts:['Naloxone（Narcan）','Flumazenil（Anexate）','20% Lipid Emulsion（脂肪乳劑）','Atropine'], ans:2, explain:'LAST 的解毒劑是 20% Lipid Emulsion。負荷劑量：1.5 ml/kg bolus；維持劑量：0.25 ml/kg/min。機制為 lipid sink theory，捕捉血中局部麻醉藥。護理師需知道存放位置！' },
+  { q:'局部麻醉藥毒性由大到小的排序是？', opts:['Ropivacaine > Bupivacaine > Lidocaine','Bupivacaine > Lidocaine > Ropivacaine','Lidocaine > Ropivacaine > Bupivacaine','三者毒性相同'], ans:1, explain:'Bupivacaine 心臟毒性最強。Ropivacaine 毒性最低，目前是神經阻斷的首選。記法：B > L > R。' },
+  { q:'脊髓麻醉用於剖腹產，阻斷高度至少需達到哪個節段？', opts:['T10','T8','T4','T6'], ans:2, explain:'剖腹產需阻斷到 T4（乳頭水平），才能確保腹部操作無痛感。阻斷到 T4 時需加強呼吸監測。' },
+  { q:'術後病人帶著周邊神經導管，觀察到敷料滲濕、疼痛突然增加，應怎麼做？', opts:['繼續觀察','立即通報醫師，評估導管是否位移或感染','自行幫病人重新固定導管','暫停幫浦，等明天查房再報告'], ans:1, explain:'敷料滲濕+疼痛突然增加是導管位移或感染的警示徵象。需立即通報麻醉醫師，不可自行調整或延遲。完整記錄滲液量/顏色、敷料範圍、病人主訴與疼痛分數。' },
+  { q:'SBAR 交班中「R（Recommendation）」的正確內容是？', opts:['「病人叫王大明，今天做了全膝關節置換」','「使用 Ropivacaine 20ml，阻斷至 T12」','「阻斷尚未完全消退，請繼續防跌倒，若有持續麻木或劇烈背痛請立即通報」','「術中最低 BP 85/50，已給予 Ephedrine 10mg」'], ans:2, explain:'S=現況、B=背景、A=評估、R=建議（後續照護重點與警示徵象）。選項3是建議的正確格式。' }
+];
+
+let currentQ = 0, answers = new Array(questions.length).fill(null), score = 0;
+
+function renderQ() {
+  document.getElementById('quiz-bar').style.width = (currentQ / questions.length * 100) + '%';
+  const q = questions[currentQ];
+  let html = '<div class="quiz-q"><p>Q' + (currentQ+1) + '/' + questions.length + '：' + q.q + '</p><div class="quiz-options">';
+  q.opts.forEach((opt, i) => {
+    let cls = 'qopt';
+    if (answers[currentQ] !== null) {
+      if (i === q.ans) cls += ' correct';
+      else if (i === answers[currentQ]) cls += ' wrong';
+    }
+    html += '<div class="' + cls + '" onclick="answerQ(' + i + ')">' + opt + '</div>';
+  });
+  html += '</div>';
+  if (answers[currentQ] !== null) {
+    const ok = answers[currentQ] === q.ans;
+    html += '<div class="quiz-explain alert alert-' + (ok ? 'success' : 'warn') + '" style="margin-top:12px;"><strong>' + (ok ? '答對了！' : '答錯了') + '</strong><br>' + q.explain + '</div>';
+    if (currentQ < questions.length - 1)
+      html += '<button class="quiz-btn" style="margin-top:12px;" onclick="nextQ()">下一題</button>';
+    else
+      html += '<button class="quiz-btn" style="margin-top:12px;" onclick="showResult()">查看成績</button>';
+  }
+  html += '</div>';
+  document.getElementById('q-display').innerHTML = html;
+}
+
+function answerQ(i) {
+  if (answers[currentQ] !== null) return;
+  answers[currentQ] = i;
+  if (i === questions[currentQ].ans) score++;
+  renderQ();
+}
+function nextQ() { currentQ++; renderQ(); }
+function showResult() {
+  document.getElementById('q-display').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('quiz-bar').style.width = '100%';
+  document.getElementById('final-score').textContent = score + ' / ' + questions.length + ' 分';
+  const pct = score / questions.length;
+  document.getElementById('final-msg').textContent =
+    pct >= 0.9 ? '優秀！您對區域麻醉護理掌握得非常好！' :
+    pct >= 0.7 ? '不錯！再複習一下錯題，就更完整了。' :
+    pct >= 0.5 ? '繼續加油！建議再仔細閱讀各章節內容。' :
+                 '沒關係，慢慢來比較快。仔細閱讀教材後再試一次！';
+}
+function resetQuiz() {
+  currentQ = 0; answers = new Array(questions.length).fill(null); score = 0;
+  document.getElementById('q-display').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-bar').style.width = '0%';
+  renderQ();
+}
+renderQ();
+</script>
+</body>
+</html>
