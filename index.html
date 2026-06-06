@@ -186,8 +186,10 @@ tr:last-child td { border-bottom: none; }
 .inner-tabs {
   display: flex; gap: 0; margin-bottom: 20px;
   border-bottom: 2px solid var(--border);
-  flex-wrap: nowrap; overflow-x: auto;
+  flex-wrap: nowrap; overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none; -ms-overflow-style: none;
+  width: 100%;
 }
 .inner-tabs::-webkit-scrollbar { display: none; }
 .itab {
@@ -651,9 +653,9 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
 <!-- ===== ANATOMY ===== -->
 <div class="section" id="sec-anatomy">
   <div class="inner-tabs">
-    <button class="itab active" onclick="showItab('anat','map')">前面皮節圖</button>
-    <button class="itab" onclick="showItab('anat','assess')">感覺評估方法</button>
-    <button class="itab" onclick="showItab('anat','surgery')">手術高度對照</button>
+    <button class="itab active" onclick="showItab('anat','map')">皮節圖</button>
+    <button class="itab" onclick="showItab('anat','assess')">感覺評估</button>
+    <button class="itab" onclick="showItab('anat','surgery')">手術高度</button>
     <button class="itab" onclick="showItab('anat','tips')">教學重點</button>
     <button class="itab" onclick="showItab('anat','landmarks')">體表標記</button>
   </div>
@@ -673,10 +675,7 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
             style="width:100%; border-radius:8px; border:1px solid var(--border); display:block;"
             onerror="this.style.display='none'; document.getElementById('svg-fallback').style.display='block'">
           <p style="font-size:11px; color:var(--text-light); margin-top:8px; line-height:1.6;">
-            Kim A, Sendlewski G, Zador E, et al. Placing a Lumbar Epidural Catheter.
-            <em>N Engl J Med.</em> 2018;378(8):e11.
-            doi:10.1056/NEJMvcm1500438<br>
-            Used under license from The New England Journal of Medicine.
+            圖片來源：Kim A, Sendlewski G, Zador E, et al. Placing a Lumbar Epidural Catheter. <em>N Engl J Med.</em> 2018;378(8):e11. doi:10.1056/NEJMvcm1500438。本圖僅供教學參考，非商業用途。
           </p>
         </div>
 
@@ -856,9 +855,9 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
         <div class="table-wrap" style="margin-top:12px;">
           <table>
             <tr><th>皮節</th><th>正面解剖標記</th><th>臨床意義</th></tr>
-            <tr><td><strong>T4</strong></td><td>乳頭線（第四肋間隙）</td><td>上腹部手術最低要求高度</td></tr>
+            <tr><td><strong>T4</strong></td><td>乳頭線（第四肋間隙）</td><td>剖腹產及較高位需求手術（依手術型態而定）</td></tr>
             <tr><td><strong>T6</strong></td><td>劍突水平（第六肋間隙）</td><td>上腹部手術常見高度</td></tr>
-            <tr><td><strong>T10</strong></td><td>肚臍水平（第十肋間隙）</td><td>下腹部手術（如剖腹產）最低要求</td></tr>
+            <tr><td><strong>T10</strong></td><td>肚臍水平（第十肋間隙）</td><td>部分下腹部/骨盆手術最低要求</td></tr>
             <tr><td><strong>T12</strong></td><td>腹股溝韌帶中點</td><td>下腹部和骨盆手術</td></tr>
             <tr><td><strong>L1</strong></td><td>腹股溝區域（T12和L2之間中點）</td><td>下肢手術</td></tr>
           </table>
@@ -998,7 +997,7 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
         </table>
       </div>
       <div class="alert alert-warn" style="margin-top:14px;">
-        <strong>止血帶疼痛特別注意：</strong>使用止血帶的手術需要阻斷到 T8，即使手術部位只在膝蓋以下。止血帶壓迫感由 T8 支配，高度不足會造成止血帶疼痛。
+        <strong>止血帶疼痛特別注意：</strong>使用大腿止血帶時，常需要較高且完整的感覺阻斷。止血帶痛的機轉複雜，即使阻斷高度足夠仍可能發生，需在術中持續監測，並提早與醫師溝通處置。
       </div>
     </div>
     <div class="card">
@@ -1200,8 +1199,8 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
   <div class="card">
     <div class="card-title">LAST 毒性排序與輔助藥</div>
     <div class="alert alert-danger">
-      <strong>毒性大小：Bupivacaine &gt; Lidocaine &gt; Chloroprocaine &gt; Ropivacaine</strong>
-      Ropivacaine 是目前神經阻斷首選，心臟毒性最低。
+      <strong>心臟毒性：Bupivacaine 最高，Ropivacaine 相對較低</strong>
+      臨床選用時以 Ropivacaine 為神經阻斷首選。各藥物毒性因濃度、劑量、注射速度而異，不應以單一順序比較。
     </div>
     <div class="grid2" style="margin-top:14px;">
       <div>
@@ -1369,8 +1368,8 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
     <div class="flow-step"><div class="step-num danger">1</div><div class="step-content"><div class="step-title danger">立即停止注射局部麻醉藥</div><div class="step-body">如正在注射中，立即停止。</div></div></div>
     <div class="flow-step"><div class="step-num danger">2</div><div class="step-content"><div class="step-title danger">呼叫與通報</div><div class="step-body">立即通知麻醉醫師、啟動急救支援（呼叫急救小組）。記錄症狀開始時間。</div></div></div>
     <div class="flow-step"><div class="step-num danger">3</div><div class="step-content"><div class="step-title danger">氣道管理（最優先）</div><div class="step-body">給予 100% O₂、準備插管設備。如有呼吸停止或癲癇，協助氣道處理。</div></div></div>
-    <div class="flow-step"><div class="step-num danger">4</div><div class="step-content"><div class="step-title danger">準備 20% Lipid Emulsion（解毒劑）</div><div class="step-body"><strong>負荷劑量：</strong>1.5 ml/kg IV bolus（70kg 成人 ≈ 100ml），90–120 秒內注射完<br><strong>維持劑量：</strong>0.25 ml/kg/min，持續至症狀改善<br><em>確認院內脂肪乳劑存放位置！</em></div></div></div>
-    <div class="flow-step"><div class="step-num danger">5</div><div class="step-content"><div class="step-title danger">心跳停止：CPR + ACLS</div><div class="step-body">立即開始 CPR，同時給予 Lipid Emulsion。避免 Epinephrine 大劑量（&gt;1 mcg/kg）、Propofol、Calcium channel blockers。</div></div></div>
+    <div class="flow-step"><div class="step-num danger">4</div><div class="step-content"><div class="step-title danger">準備 20% Lipid Emulsion（解毒劑）</div><div class="step-body"><strong>負荷劑量：</strong>1.5 ml/kg IV bolus（70kg 成人 ≈ 100ml），90–120 秒內注射完<br><strong>維持劑量：</strong>0.25 ml/kg/min；症狀穩定後仍持續至少 15 分鐘<br><strong>最大總量：</strong>12 ml/kg<br><em>確認院內脂肪乳劑存放位置！</em></div></div></div>
+    <div class="flow-step"><div class="step-num danger">5</div><div class="step-content"><div class="step-title danger">心跳停止：CPR + ACLS</div><div class="step-body">立即開始 CPR，同時給予 Lipid Emulsion。Epinephrine 使用小劑量（初始 &lt;1 mcg/kg）；避免 Propofol 及 Calcium channel blockers。</div></div></div>
     <div class="flow-step"><div class="step-num danger">6</div><div class="step-content"><div class="step-title danger">完整記錄</div><div class="step-body">症狀開始時間、藥物劑量、急救處置、生命徵象變化、所有給藥時間點。</div></div></div>
   </div>
 
@@ -1395,10 +1394,10 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
 <!-- ===== CHECKLIST ===== -->
 <div class="section" id="sec-checklist">
   <div class="inner-tabs">
-    <button class="itab active" onclick="showItab('checklist','preop')">術前準備</button>
-    <button class="itab" onclick="showItab('checklist','intraop')">術中監測</button>
-    <button class="itab" onclick="showItab('checklist','postop')">術後照護</button>
-    <button class="itab" onclick="showItab('checklist','sbar')">SBAR交班</button>
+    <button class="itab active" onclick="showItab('checklist','preop')">術前</button>
+    <button class="itab" onclick="showItab('checklist','intraop')">術中</button>
+    <button class="itab" onclick="showItab('checklist','postop')">術後</button>
+    <button class="itab" onclick="showItab('checklist','sbar')">SBAR</button>
   </div>
 
   <div class="itab-content active" id="checklist-preop">
