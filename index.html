@@ -80,13 +80,20 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
 @media(max-width: 640px) {
   .grid2, .grid3 { grid-template-columns: 1fr; }
   .nav-logo img { height: 26px; }
-  .nav-btn { font-size: 12px; padding: 7px 10px; }
+  .nav-btn { font-size: 12px; padding: 7px 10px; white-space: nowrap; }
   main { padding: 16px 14px 60px; }
-  .card { padding: 16px 16px; }
-  .hero { padding: 22px 18px; }
+  .card { padding: 16px 15px; }
+  .card-title { font-size: 15px; }
+  .hero { padding: 20px 16px; }
   .hero h1 { font-size: 18px; }
   .acc-header { font-size: 13px; padding: 12px 14px; }
-  .acc-body { padding: 14px 16px; }
+  .acc-body { padding: 14px 15px; }
+  .itab { font-size: 13px; padding: 8px 13px; white-space: nowrap; }
+  .stab { font-size: 12px; padding: 7px 12px; }
+  .table-wrap table { font-size: 12px; }
+  .table-wrap th, .table-wrap td { padding: 7px 10px; }
+  .sbar-grid { grid-template-columns: 28px 1fr; gap: 4px 10px; }
+  .sbar-letter { font-size: 18px; }
 }
 
 /* ROLE CARDS */
@@ -176,7 +183,13 @@ tr:last-child td { border-bottom: none; }
 .legend-text { font-size: 13px; }
 
 /* INNER TABS */
-.inner-tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid var(--border); flex-wrap: wrap; }
+.inner-tabs {
+  display: flex; gap: 0; margin-bottom: 20px;
+  border-bottom: 2px solid var(--border);
+  flex-wrap: nowrap; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.inner-tabs::-webkit-scrollbar { display: none; }
 .itab {
   padding: 9px 18px; border: none; background: none; cursor: pointer;
   font-size: 14px; color: var(--text-light); border-bottom: 2px solid transparent;
