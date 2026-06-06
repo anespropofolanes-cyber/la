@@ -24,6 +24,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; font-size: 15px; line-height: 1.75; }
+img { max-width: 100%; height: auto; }
 
 nav {
   position: sticky; top: 0; z-index: 100;
@@ -31,9 +32,12 @@ nav {
   box-shadow: 0 1px 4px rgba(92,89,83,0.08);
 }
 .nav-inner {
-  max-width: 980px; margin: 0 auto; padding: 0 20px;
-  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  max-width: 980px; margin: 0 auto; padding: 0 12px;
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: nowrap; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
 }
+.nav-inner::-webkit-scrollbar { display: none; }
 .nav-logo { display: flex; align-items: center; margin-right: 12px; padding: 10px 0; }
 .nav-logo img { height: 32px; }
 .nav-btn {
@@ -73,7 +77,17 @@ main { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
 /* GRID */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-@media(max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+@media(max-width: 640px) {
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .nav-logo img { height: 26px; }
+  .nav-btn { font-size: 12px; padding: 7px 10px; }
+  main { padding: 16px 14px 60px; }
+  .card { padding: 16px 16px; }
+  .hero { padding: 22px 18px; }
+  .hero h1 { font-size: 18px; }
+  .acc-header { font-size: 13px; padding: 12px 14px; }
+  .acc-body { padding: 14px 16px; }
+}
 
 /* ROLE CARDS */
 .role-card { border-radius: 10px; padding: 16px 18px; border: 1px solid var(--border); }
@@ -246,7 +260,7 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
 <nav>
   <div class="nav-inner">
     <div class="nav-logo">
-      <img src="logo.png" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <img src="log.png" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
       <span style="display:none; font-weight:700; color:var(--primary-dark); font-size:15px;">區域麻醉護理教學</span>
     </div>
     <button class="nav-btn active" onclick="showSection('home')">首頁</button>
@@ -1010,9 +1024,12 @@ ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--
       <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
         <div style="flex:0 0 auto;">
           <img src="dermatome-bent.png" alt="前彎姿勢皮節圖"
-            style="max-width:280px; border-radius:8px; border:1px solid var(--border);"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <div style="display:none;"></div>
+            style="max-width:280px; border-radius:8px; border:1px solid var(--border); display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none; width:240px; height:320px; border:2px dashed var(--border); border-radius:8px; align-items:center; justify-content:center; flex-direction:column; gap:8px; color:var(--text-light); font-size:13px; text-align:center; padding:20px;">
+            <div style="font-size:32px; opacity:0.3;">[ 圖片 ]</div>
+            <div>請將前彎皮節圖<br>放入資料夾</div>
+          </div>
         </div>
         <div style="flex:1; min-width:200px;">
           <p style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--primary-dark);">這張圖說明了什麼？</p>
